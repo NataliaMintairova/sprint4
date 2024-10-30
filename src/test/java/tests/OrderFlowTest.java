@@ -17,16 +17,11 @@ import pageobject.OrderPage;
 import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 
-public class OrderFlowTest {
-    private WebDriver driver;
-@Test
-    public void check1UpperOrderFlow(){
-    initFirefox();
-    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    driver.get("https://qa-scooter.praktikum-services.ru/");
+public class OrderFlowTest extends BaseClassTest {
 
-    CookiePage objCookiePage = new CookiePage(driver);
-    objCookiePage.clickCookieButton();
+
+@Test
+    public void check1UpperOrderFlowTest(){
 
     MainPage objMainPage = new MainPage(driver);
     objMainPage.clickUpperOrderButton();
@@ -54,13 +49,7 @@ public class OrderFlowTest {
 }
 
 @Test
-public void check2UpperOrderFlow() {
-    initChrome();
-    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    driver.get("https://qa-scooter.praktikum-services.ru/");
-
-    CookiePage objCookiePage = new CookiePage(driver);
-    objCookiePage.clickCookieButton();
+public void check2UpperOrderFlowTest() {
 
     MainPage objMainPage = new MainPage(driver);
     objMainPage.clickUpperOrderButton();
@@ -82,41 +71,18 @@ public void check2UpperOrderFlow() {
     objOrdAboutPage.clickOrderButton();
     objOrdAboutPage.clickYesApplyOrderButton();
 
-    boolean isVisibleOrderedWindow = objOrdAboutPage.isDisplayedWindowOrderApplied();
-    Assert.assertTrue(isVisibleOrderedWindow);
+    Assert.assertTrue(objOrdAboutPage.isDisplayedWindowOrderApplied());
 }
 
 
 @Test
-public void checkLowerOrderFlow() {
-    initFirefox();
-    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    driver.get("https://qa-scooter.praktikum-services.ru/");
-
-    CookiePage objCookiePage = new CookiePage(driver);
-    objCookiePage.clickCookieButton();
+public void checkLowerOrderFlowTest() {
 
     MainPage objMainPage = new MainPage(driver);
     objMainPage.scrollToLowerOrderButton();
     objMainPage.clickLowerOrderButton();
 
+    OrderPage objOrderPage = new OrderPage(driver);
+    Assert.assertTrue(objOrderPage.checkLoadingOrderPage());
 }
-
-    @After
-    public void tearDown() {
-        driver.quit();
-    }
-
-
-    public void initChrome(){
-        ChromeOptions options = new ChromeOptions();
-        driver = new ChromeDriver(options);
-    }
-
-    public void initFirefox(){
-        FirefoxOptions options = new FirefoxOptions();
-        System.setProperty("webdriver.gecko.driver", "/home/tasha/Рабочий стол/я.практикум/WebDriver/bin/geckodriver");
-        driver = new FirefoxDriver(options);
-    }
-
 }

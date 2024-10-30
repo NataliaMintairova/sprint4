@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class CookiePage {
     private WebDriver driver;
-
+    //кнопка принять куки
     private By closeCookieButton = By.xpath(".//button[text()='да все привыкли']");
 
 public CookiePage(WebDriver driver){
